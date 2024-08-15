@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "frontend_bucket" {
-  bucket = "website_portfolio_frontend_kataria_keval_972"
+  bucket = "portfolio-frontend-kataria"
 }
 
 resource "aws_s3_bucket_object" "portfolio_files" {

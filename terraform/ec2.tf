@@ -1,10 +1,14 @@
+data "aws_ssm_parameter" "latest_amazon_linux_ami" {
+  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
+}
+
 resource "aws_instance" "flask_server" {
   ami           = data.aws_ssm_parameter.latest_amazon_linux_ami.value
   instance_type = "t2.micro"
 
   subnet_id                   = aws_subnet.public_a.id
   associate_public_ip_address = true
-  security_groups             = [aws_security_group.ec2_sg.name]
+  security_groups             = [aws_security_group.ec2_sg.id]
   tags = {
     Name = "FlaskServer"
   }
@@ -23,7 +27,7 @@ resource "aws_instance" "flask_server" {
               source venv/bin/activate
 
               # Fetch RDS credentials from Secrets Manager
-              secret=$(aws secretsmanager get-secret-value --secret-id rds-credentials --query SecretString --output text)
+              secret=$(aws secretsmanager get-secret-value --secret-id rds-credential --query SecretString --output text)
               username=$(echo $secret | jq -r .username)
               password=$(echo $secret | jq -r .password)
 

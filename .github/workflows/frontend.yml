@@ -25,7 +25,7 @@ jobs:
 
     - name: Sync S3 bucket
       run: |
-        aws s3 sync ./dist s3://website_portfolio_frontend_kataria_keval_972 --delete
+        aws s3 sync ./dist s3://portfolio-frontend-kataria --delete
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

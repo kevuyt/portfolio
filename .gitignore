@@ -50,3 +50,7 @@ venv.bak/
 
 .cache/
 .vite/
+
+*.tfstate
+*.tfstate.backup
+*.hcl
