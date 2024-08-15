@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - main
 
 jobs:
   deploy:
@@ -21,13 +20,12 @@ jobs:
 
     - name: Install dependencies and build
       run: |
-        cd portfolio-website
         npm install
         npm run build
 
     - name: Sync S3 bucket
       run: |
-        aws s3 sync ./portfolio-website/dist s3://your-portfolio-bucket-name --delete
+        aws s3 sync ./dist s3://your-portfolio-bucket-name --delete
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
